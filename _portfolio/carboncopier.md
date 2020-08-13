@@ -36,26 +36,35 @@ That suggests your _API key or subdomain change or were entered incorrectly on i
 We're going to setup a new target & trigger:
 
 1) If you haven't already, [generate a Zendesk API token](https://support.zendesk.com/hc/en-us/articles/226022787-Generating-a-new-API-token-)
+
 2) Copy the token, and the email address you were signed in with when you generated the token.
+
 3) Go to Settings > Extensions and create a new 'HTTP Target'
+
 4) Use the settings below
+
 ```
-URL: https://YOURSUBDOMAIN.zendesk.com/api/v2/tickets/{{ticket.id}}.json
+URL: https://YOURSUBDOMAIN.zendesk.com/api/v2/tickets/\{{ticket.id}}.json
 Method: PUT
 Content Type: JSON
 Username: youremail@yourdomain.com/token
 Password: Pasted API Token
 ```
+
 5) Test the target to make sure it's working 
+
 6) Go to your triggers, clone the trigger created by the app.
+
 7) Open the new cloned trigger using below body for the target message: 
+
 ```
 {
   "ticket": {
-    "additional_collaborators": "{{ticket.organization.custom_fields.org_cc}},{{ticket.requester.custom_fields.user_cc}}"
+    "additional_collaborators": "\{{ticket.organization.custom_fields.org_cc}},\{{ticket.requester.custom_fields.user_cc}}"
   }
 }
 ```
+
 8) Deactivate the original trigger
 
 This should work now! If it does not, go back to Target Failures and see if there are any new failures that have popped up, you might need to correct the Target Username and/or Password.
