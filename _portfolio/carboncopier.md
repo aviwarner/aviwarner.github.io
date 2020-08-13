@@ -43,13 +43,15 @@ We're going to setup a new target & trigger:
 
 4) Use the settings below
 
+{% raw %}
 ```
-URL: https://YOURSUBDOMAIN.zendesk.com/api/v2/tickets/\{{ticket.id}}.json
+URL: https://YOURSUBDOMAIN.zendesk.com/api/v2/tickets/{{ticket.id}}.json
 Method: PUT
 Content Type: JSON
 Username: youremail@yourdomain.com/token
 Password: Pasted API Token
 ```
+{% endraw %}
 
 5) Test the target to make sure it's working 
 
@@ -57,13 +59,15 @@ Password: Pasted API Token
 
 7) Open the new cloned trigger using below body for the target message: 
 
+{% raw %}
 ```
 {
   "ticket": {
-    "additional_collaborators": "\{{ticket.organization.custom_fields.org_cc}},\{{ticket.requester.custom_fields.user_cc}}"
+    "additional_collaborators": "{{ticket.organization.custom_fields.org_cc}},{{ticket.requester.custom_fields.user_cc}}"
   }
 }
 ```
+{% endraw %}
 
 8) Deactivate the original trigger
 
